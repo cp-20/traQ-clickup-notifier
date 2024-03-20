@@ -16,12 +16,7 @@ const scheduleNextDay = () => {
   const now = new Date();
   const tomorrow = new Date(now.getTime() + 1000 * 60 * 60 * 24);
   const nextDay = new Date(
-    tomorrow.getFullYear(),
-    tomorrow.getMonth(),
-    tomorrow.getDate(),
-    0,
-    0,
-    0
+    `${tomorrow.getFullYear()}-${tomorrow.getMonth()}-${tomorrow.getDate()}T00:00:00+9:00`
   );
 
   console.log('Scheduled to run at', nextDay.toISOString());
