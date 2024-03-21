@@ -6,7 +6,8 @@ const cron = async () => {
 
   try {
     const message = await getMessage();
-    await postTraqMessage(message);
+    // await postTraqMessage(message);
+    console.log('message posted', message.length);
   } catch (error) {
     console.error('Failed to run cron', error);
   }
@@ -15,9 +16,13 @@ const cron = async () => {
 const scheduleNextDay = () => {
   const now = new Date();
   const tomorrow = new Date(now.getTime() + 1000 * 60 * 60 * 24);
-  const nextDay = new Date(
-    `${tomorrow.getFullYear()}-${tomorrow.getMonth()}-${tomorrow.getDate()}T00:00:00+9:00`
-  );
+
+  const nextDayYear = tomorrow.getFullYear();
+  const nextDayMonth = (tomorrow.getMonth() + 1).toString().padStart(2, '0');
+  const nextDayDate = tomorrow.getDate().toString().padStart(2, '0');
+  const nextDayString = `${nextDayYear}-${nextDayMonth}-${nextDayDate}T00:00:00+09:00`;
+
+  const nextDay = new Date(nextDayString);
 
   console.log('Scheduled to run at', nextDay.toISOString());
 
